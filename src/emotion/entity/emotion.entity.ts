@@ -23,17 +23,11 @@ export class Emotion {
   @CreateDateColumn()
   createdAt: Date;
 
-  constructor(
-    uuid: string,
-    name: string,
-    intesity: number,
-    type: string,
-    createdAt: Date,
-  ) {
+  constructor(uuid: string, name: string, intensity: number, type: string) {
     this.uuid = uuid;
     this.name = name;
-    this.intensity = intesity;
+    this.intensity = intensity;
     this.type = type;
-    this.createdAt = createdAt;
+    this.createdAt = new Date();
   }
 }
