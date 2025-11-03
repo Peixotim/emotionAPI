@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
 import { EmotionController } from './emotion.controller';
 import { EmotionService } from './emotion.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Emotion } from './entity/emotion.entity';
 
 @Module({
-  imports: [],
+  imports: [TypeOrmModule.forFeature([Emotion])],
   controllers: [EmotionController],
   providers: [EmotionService],
 })
