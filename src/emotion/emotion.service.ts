@@ -37,7 +37,9 @@ export class EmotionService {
   }
 
   public async findAll(): Promise<Emotion[]> {
-    if ((await this.emotionRepository.find()).length === 0) {
+    const emotions: Emotion[] = await this.emotionRepository.find();
+
+    if (emotions.length === 0) {
       throw new HttpException(
         `Error, there is no emotion registered in our database !`,
         HttpStatusCode.NotFound,
@@ -45,8 +47,7 @@ export class EmotionService {
     }
 
     try {
-      const find: Emotion[] = await this.emotionRepository.find();
-      return find;
+      return emotions;
     } catch (error: unknown) {
       console.error(
         '[EmotionService][find] Error:',

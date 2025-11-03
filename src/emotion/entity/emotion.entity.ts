@@ -13,7 +13,7 @@ export class Emotion {
   @Column({ type: 'varchar', nullable: false })
   name: string;
 
-  @Column({ type: 'number', nullable: false })
+  @Column({ type: 'float', nullable: false })
   intensity: number;
 
   @Column({ type: 'varchar' })
