@@ -1,10 +1,17 @@
-import { CallHandler, ExecutionContext, NestInterceptor } from '@nestjs/common';
-import { Observable, tap } from 'rxjs';
+import {
+  CallHandler,
+  ExecutionContext,
+  Injectable,
+  NestInterceptor,
+} from '@nestjs/common';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+@Injectable()
 export class TimingConnectionInterceptor implements NestInterceptor {
   public intercept(
     _context: ExecutionContext,
     next: CallHandler<any>,
-  ): Promise<Observable<any>> {
+  ): Observable<any> {
     const now = Date.now();
 
     console.log(`TimingConnectionInterceptor execute time ${now}`);
