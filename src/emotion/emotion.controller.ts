@@ -6,15 +6,17 @@ import {
   ParseUUIDPipe,
   Post,
   Patch,
-  UsePipes,
+  UseInterceptors,
 } from '@nestjs/common';
 import { EmotionService } from './emotion.service';
 import { Emotion } from './entity/emotion.entity';
 import { EmotionCreate } from './DTOs/emotion.create.dto';
 import { ModifyName } from './DTOs/emotion.modifyName.dto';
 import { RequestOne } from './DTOs/emotion.requestOne.dto';
+import { TimingConnectionInterceptor } from 'src/common/interceptors/timer-connection.interceptor';
 
 @Controller('emotion')
+@UseInterceptors(TimingConnectionInterceptor) //Exibe o tempo demora para a execução do projeto
 export class EmotionController {
   constructor(private readonly emotionService: EmotionService) {}
 
