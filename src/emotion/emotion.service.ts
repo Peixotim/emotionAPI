@@ -3,7 +3,7 @@ import { Repository } from 'typeorm';
 import { Emotion } from './entity/emotion.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EmotionCreate } from './DTOs/emotion.create.dto';
-import { HttpStatusCode } from 'axios';
+import { HttpStatus } from '@nestjs/common';
 import { RequestOne } from './DTOs/emotion.requestOne.dto';
 import { ModifyName } from './DTOs/emotion.modifyName.dto';
 
@@ -33,7 +33,7 @@ export class EmotionService {
       );
       throw new HttpException(
         `Failure to create a new emotion ${error instanceof Error ? error.message : 'unknown error'}`,
-        HttpStatusCode.InternalServerError,
+        HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
   }
@@ -44,7 +44,7 @@ export class EmotionService {
     if (emotions.length === 0) {
       throw new HttpException(
         `Error, there is no emotion registered in our database !`,
-        HttpStatusCode.NotFound,
+        HttpStatus.NOT_FOUND,
       );
     }
 
@@ -63,7 +63,7 @@ export class EmotionService {
 
       throw new HttpException(
         `Failure to seek emotions ${error instanceof Error ? error.message : 'unknown error'}`,
-        HttpStatusCode.InternalServerError,
+        HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
   }
@@ -75,7 +75,7 @@ export class EmotionService {
     if (findOne === null) {
       throw new HttpException(
         `Error, there is no emotion registered in our database !`,
-        HttpStatusCode.NotFound,
+        HttpStatus.NOT_FOUND,
       );
     }
 
@@ -94,7 +94,7 @@ export class EmotionService {
 
       throw new HttpException(
         `Failure to seek an emotion ${error instanceof Error ? error.message : 'unknown error'}`,
-        HttpStatusCode.InternalServerError,
+        HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
   }
@@ -107,7 +107,7 @@ export class EmotionService {
     if (findOne === null) {
       throw new HttpException(
         `Emotion with this UUID : ${uuid} was not found`,
-        HttpStatusCode.NotFound,
+        HttpStatus.NOT_FOUND,
       );
     }
 
@@ -128,7 +128,7 @@ export class EmotionService {
 
       throw new HttpException(
         `Failure to seek emotions ${error instanceof Error ? error.message : 'unknown error'}`,
-        HttpStatusCode.InternalServerError,
+        HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
   }

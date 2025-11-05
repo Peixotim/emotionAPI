@@ -6,6 +6,7 @@ import {
   ParseUUIDPipe,
   Post,
   Patch,
+  UsePipes,
 } from '@nestjs/common';
 import { EmotionService } from './emotion.service';
 import { Emotion } from './entity/emotion.entity';
