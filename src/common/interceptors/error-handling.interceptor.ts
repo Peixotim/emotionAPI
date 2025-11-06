@@ -4,7 +4,7 @@ import {
   ExecutionContext,
   CallHandler,
   HttpException,
-  BadRequestException,
+  InternalServerErrorException,
 } from '@nestjs/common';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -13,12 +13,14 @@ export class ErrorHandlingInterceptor implements NestInterceptor {
   public intercept(_context: ExecutionContext, next: CallHandler<any>) {
     return next.handle().pipe(
       catchError((error) => {
+        if (error instanceof HttpException) {
+          return throwError(() => error);
+        }
+        console.error('[ErrorHandlingInterceptor] Erro não tratado:', error);
         return throwError(() => {
-          if (error instanceof HttpException) {
-            return new BadRequestException(
-              'Sorry, this error was not addressed by our team, please contact us to correct the error',
-            );
-          }
+          new InternalServerErrorException(
+            `'Sorry, this error was not addressed by our team, please contact us to correct the error',`,
+          );
         });
       }),
     );

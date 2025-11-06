@@ -17,7 +17,7 @@ import { TimingConnectionInterceptor } from 'src/common/interceptors/timer-conne
 import { ErrorHandlingInterceptor } from 'src/common/interceptors/error-handling.interceptor';
 
 @Controller('emotion')
-@UseInterceptors(TimingConnectionInterceptor, ErrorHandlingInterceptor) //Exibe o tempo demora para a execução do projeto
+@UseInterceptors(TimingConnectionInterceptor, ErrorHandlingInterceptor)
 export class EmotionController {
   constructor(private readonly emotionService: EmotionService) {}
 
