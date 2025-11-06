@@ -18,7 +18,7 @@ export class ErrorHandlingInterceptor implements NestInterceptor {
         }
         console.error('[ErrorHandlingInterceptor] Erro não tratado:', error);
         return throwError(() => {
-          new InternalServerErrorException(
+          return new InternalServerErrorException(
             `'Sorry, this error was not addressed by our team, please contact us to correct the error',`,
           );
         });
